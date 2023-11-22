@@ -1,3 +1,4 @@
+# Login.py
 import streamlit as st
 import mysql.connector
 from passlib.hash import bcrypt
@@ -7,7 +8,7 @@ def check_user(username, password):
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="mysqlroot",
+        password="atharva",
         database="cms"
     )
     cursor = conn.cursor()
