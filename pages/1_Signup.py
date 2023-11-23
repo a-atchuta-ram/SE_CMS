@@ -1,6 +1,7 @@
 import streamlit as st
 import mysql.connector
 from passlib.hash import bcrypt
+import re
 
 # Function to add a new user to the database
 def add_user(username, email, password):
@@ -29,6 +30,15 @@ def signup():
     signup_email = st.text_input("Enter Email:")
     signup_password = st.text_input("Create Password:", type="password")
     if st.button("Signup"):
+        # Check if the email is valid
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", signup_email):
+            st.error("Please enter a valid email address.")
+            return
+
+        # Check if the password is at least 8 characters long
+        if len(signup_password) < 8:
+            st.error("Password must be at least 8 characters long.")
+            return
         add_user(signup_username, signup_email, signup_password)
         st.success("Signup successful! You can now go to the login page.")
 
